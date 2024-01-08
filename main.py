@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 from PIL import Image, ImageOps
-
+import streamlit as st
 
 def dilation(img, d):
     dilated = np.zeros(img.shape)
@@ -63,13 +63,26 @@ def increaseContrast(image, mask):
 
 def main():
     # open colour image
-    image_file = Image.open('/content/drive/MyDrive/chest_x_rays.jpg')
+    st.title('Top hat Transformation')
+    st.sidebar.title('Transformation')
+    col1, col2 = st.columns(2)
+    image_file = st.sidebar.file_uploader("Upload the image", type=['jpg', 'png', 'jpeg'])
+    val = st.sidebar.slider('Select Mask Size', 0, 10, 3)
+        if image_file is not None:
+            col1.image(image_file, caption='Uploaded Image', use_column_width=True))
+            if st.button('Process'):
+                chest_x_rays_1 = increaseContrast(image_file, val)
+                col2.image(chest_x_rays_1, caption='Processed Image', use_column_width=True)
+            
+    
+    
+    #image_file = Image.open('/content/drive/MyDrive/chest_x_rays.jpg')
     # Proposed method
-    chest_x_rays_1 = increaseContrast(image_file, 3)
-    plt.savefig('chest_x_rays_1.jpg')
+    
+    #plt.savefig('chest_x_rays_1.jpg')
     # After increasing mask size
-    chest_x_rays_2 = increaseContrast(image_file, 9)
-    plt.savefig('chest_x_rays_2.jpg')
+    #chest_x_rays_2 = increaseContrast(image_file, 9)
+    #plt.savefig('chest_x_rays_2.jpg')
 
 
 if __name__ == '__main__':
