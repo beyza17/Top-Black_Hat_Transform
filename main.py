@@ -21,7 +21,7 @@ def erosion(img, d):
 
 
 def increaseContrast(image, mask):
-    x = np.array(image)
+    x = np.asarray(image)
     colorImageArray = np.zeros(x.shape)
     for i in range(0, 3):
         img = x[:, :, i]
