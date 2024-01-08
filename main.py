@@ -69,7 +69,7 @@ def main():
     image_file = st.sidebar.file_uploader("Upload the image", type=['jpg', 'png', 'jpeg'])
     val = st.sidebar.slider('Select Mask Size', 0, 10, 3)
     if image_file is not None:
-        col1.image(image_file, caption='Uploaded Image', use_column_width=True))
+        col1.image(image_file, caption='Uploaded Image', use_column_width=True)
         if st.button('Process'):
             chest_x_rays_1 = increaseContrast(image_file, val)
             col2.image(chest_x_rays_1, caption='Processed Image', use_column_width=True)
